@@ -1,0 +1,42 @@
+version: '2'
+
+services:
+    php:
+        build: data/docker/frontend
+        ports:
+            - 8080:80
+        extra_hosts:
+            - "super-test.loc:127.0.0.1"
+        domainname: super-test.loc
+        environment:
+            VIRTUAL_HOST: super-test.loc
+        volumes:
+            - .:/var/www
+        tty: true
+        networks:
+          - front-tier
+          - back-tier
+
+    mysql:
+        ports:
+            - "6033:3306"
+        build: data/docker/db
+        volumes:
+            - ./.mysql:/var/lib/mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=lemon-docker
+            - MYSQL_DATABASE=lemon
+            - MYSQL_USER=lemon
+            - MYSQL_PASSWORD=lemon-docker
+        networks:
+            - back-tier
+
+    pma:
+        image: phpmyadmin/phpmyadmin:4.6
+        ports:
+            - 8181:80
+        environment:
+            - PMA_HOST=mysql
+        networks:
+          - front-tier
+          - back-tier
