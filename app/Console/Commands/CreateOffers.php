@@ -30,14 +30,21 @@ class CreateOffers extends Command
     private $offerApiRequest;
 
     /**
-     * CreateOffers constructor.
-     *
-     * @param OfferApiRequest $offerApiRequest
+     * @var Offer
      */
-    public function __construct(OfferApiRequest $offerApiRequest)
+    private $offer;
+
+    /**
+     * CreateOffers constructor.
+     * @param OfferApiRequest $offerApiRequest
+     * @param Offer $offer
+     */
+
+    public function __construct(OfferApiRequest $offerApiRequest, Offer $offer)
     {
         parent::__construct();
 
+        $this->offer = $offer;
         $this->offerApiRequest = $offerApiRequest;
     }
 
@@ -53,7 +60,7 @@ class CreateOffers extends Command
 
         foreach ($offers as $key => $item) {
             /** @var \App\Offer $offer */
-            $offer = new Offer();
+            $offer = $this->offer->newInstance();
             $item = array_shift($item);
 
             if (!array_key_exists("id", $item)) {
