@@ -12,41 +12,49 @@ class FirstOffer extends AbstractBaseOffer
     /**
      * Set applicationId
      *
-     * @return $this|void
+     * @return $this
      */
     public function setApplicationId()
     {
         $this->applicationId = $this->dataApi['id'];
+
+        return $this;
     }
 
     /**
      * Set countries
      *
-     * @return $this|void
+     * @return $this
      */
     public function setCountries()
     {
         $this->countries[] = $this->dataApi['country'];
+
+        return $this;
     }
 
     /**
      * Set payout
      *
-     * @return $this|void
+     * @return $this
      */
     public function setPayout()
     {
         $this->payout = $this->dataApi['points'] / $this->rate;
+
+        return $this;
     }
 
     /**
      * Set platform
      *
-     * @return $this|void
+     * @return $this
      */
     public function setPlatform()
     {
         $this->platform = $this->dataApi['platform'];
+
+        return $this;
     }
 
 }

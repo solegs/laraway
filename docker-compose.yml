@@ -10,6 +10,10 @@ services:
         domainname: super-test.loc
         environment:
             VIRTUAL_HOST: super-test.loc
+#            DB_HOST: mysql
+#            DB_DATABASE: lemon
+#            DB_USERNAME: lemon
+#            DB_PASSWORD: lemon-docker
         volumes:
             - .:/var/www
         tty: true
